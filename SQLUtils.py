@@ -1,5 +1,5 @@
-from SQLEngine import SQLEngine
-from StampPrint import stamp_print
+from custom_libs import SQLEngine
+#from SQLEngine import SQLEngine
 import os
 import pandas as pd
 import yaml
@@ -39,31 +39,26 @@ class SQLUtils:
     def get(self, table_name, cols=None, limit_value=None, where_col=None, where_value=None, where_equal=None):
         query = self.select_query_builder(table_name=table_name, cols=cols, limit_value=limit_value, where_col=where_col, where_value=where_value, where_equal=where_equal)
 
-        stamp_print(query)
+        print(query)
 
         result = self.execute(query)
-        #with SQLEngine() as sql_engine:
-        #    result = pd.read_sql(query, sql_engine.engine)
 
         return(result)
 
     def update(self, table_name, update_col, update_value, where_equal=None, where_col=None, where_value=None):
         query = self.update_query_builder(table_name=table_name, update_col=update_col, update_value=update_value, where_col=where_col, where_value=where_value, where_equal=where_equal)
 
-        stamp_print(query)
+        print(query)
 
         result = self.execute(query)
-#        with SQLEngine() as sql_engine:
-#            result = sql_engine.execute(query)
 
         return(result)
 
     def execute(self, statement):
-        with SQLEngine() as sql_engine:
+        with SQLEngine.SQLEngine() as sql_engine:
             if "SELECT" in statement.upper():
                 return(pd.read_sql(statement, sql_engine))
             else:
                 return(sql_engine.execute(statement))
-
 
 
