@@ -1,4 +1,8 @@
-This structure works, but we may need to look into a better way to combine everything. With this example, from `custom_libs` we have to run `from test import test` and then `test.TestClass()`.
+## Custom Libs
 
-Ideally we'd have it so that it would just be an `import custom_libs` or `from custom_libs import [ClassName]`
-We can do this just by having each class be its own file within `custom_libs`.
+This python package contains useful tools and utilities that I use frequently. 
+
+### SQLUtils
+
+`SQLUtils` contains an engine class (`SQLEngine`) and a combined class that implements the engine and allows users to execute commands (SQLUtils).
+
